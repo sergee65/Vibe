@@ -1,0 +1,53 @@
+.tihon-hat-layer {
+  pointer-events: none;
+}
+
+.tihon-hat {
+  display: none;
+  pointer-events: none;
+}
+
+[data-hat="straw"] .tihon-hat--straw { display: block; }
+[data-hat="beanie"] .tihon-hat--beanie { display: block; }
+[data-hat="cap"] .tihon-hat--cap { display: block; }
+[data-hat="tophat"] .tihon-hat--tophat { display: block; }
+[data-hat="crown"] .tihon-hat--crown { display: block; }
+[data-hat="wizard"] .tihon-hat--wizard { display: block; }
+
+.tihon-toast {
+  position: fixed;
+  top: clamp(70px, 9vh, 92px);
+  left: 50%;
+  z-index: 240;
+  max-width: min(440px, calc(100vw - 30px));
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(20, 16, 22, 0.88);
+  color: #fff5e3;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.26);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, -8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.tihon-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 620px) {
+  .tihon-toast {
+    top: 62px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}

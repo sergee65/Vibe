@@ -101,6 +101,125 @@
     text-shadow: 0 1px 0 rgba(255, 250, 240, 0.5);
   }
 
+  .back-home {
+    position: fixed;
+    top: calc(18px + env(safe-area-inset-top, 0px));
+    right: 22px;
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 34px;
+    padding: 0 12px 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    background: rgba(255, 248, 236, 0.8);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(74, 48, 26, 0.12);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(10px) saturate(120%);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .back-home svg {
+    width: 13px;
+    height: 13px;
+    flex: none;
+  }
+
+  .back-home:hover {
+    background: #fff8ec;
+    border-color: rgba(169, 84, 52, 0.35);
+    color: var(--accent-deep);
+    transform: translateY(-1px);
+  }
+
+  .back-home:active { transform: scale(0.97); }
+
+  .back-home:focus-visible {
+    outline: 2px solid rgba(201, 112, 75, 0.7);
+    outline-offset: 3px;
+  }
+
+  .sound-toggle {
+    position: fixed;
+    top: calc(60px + env(safe-area-inset-top, 0px));
+    right: 22px;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background: rgba(255, 248, 236, 0.8);
+    color: var(--ink);
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(74, 48, 26, 0.12);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(10px) saturate(120%);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .sound-toggle:hover {
+    background: #fff8ec;
+    border-color: rgba(169, 84, 52, 0.35);
+    color: var(--accent-deep);
+    transform: translateY(-1px);
+  }
+
+  .sound-toggle:active { transform: scale(0.95); }
+
+  .sound-toggle:focus-visible {
+    outline: 2px solid rgba(201, 112, 75, 0.7);
+    outline-offset: 3px;
+  }
+
+  .sound-toggle svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+  }
+
+  .sound-toggle .snd-on { display: none; }
+
+  .sound-toggle[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff8ec;
+  }
+
+  .sound-toggle[aria-pressed="true"] .snd-on { display: block; }
+  .sound-toggle[aria-pressed="true"] .snd-off { display: none; }
+
+  @media (max-width: 760px) {
+    .back-home {
+      top: calc(14px + env(safe-area-inset-top, 0px));
+      right: 15px;
+      height: 31px;
+      padding: 0 10px 0 8px;
+      gap: 5px;
+      font-size: 9px;
+    }
+
+    .back-home svg { width: 12px; height: 12px; }
+
+    .sound-toggle {
+      top: calc(52px + env(safe-area-inset-top, 0px));
+      right: 15px;
+      width: 31px;
+      height: 31px;
+    }
+
+    .sound-toggle svg { width: 14px; height: 14px; }
+  }
+
   .hint {
     position: fixed;
     left: 50%;
@@ -677,6 +796,7 @@
     .brand, .dock, .hint { animation: none; }
   }
 </style>
+<link rel="stylesheet" href="tihon-profile.css" />
 </head>
 <body>
 <canvas id="room" aria-label="Уютная комната с котиками"></canvas>
@@ -694,6 +814,24 @@
   </span>
   <span class="brand-name">Кошачья комната</span>
 </header>
+
+<a class="back-home" href="index.html?back=1" aria-label="Вернуться в главное меню">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M15 5 8 12l7 7M8 12h12"/>
+  </svg>
+  <span>В меню</span>
+</a>
+
+<button class="sound-toggle" id="soundBtn" type="button" aria-pressed="false" aria-label="Включить музыку и звуки" title="Включить музыку и звуки">
+  <svg class="snd-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9.5v5h3.8l4.7 3.8V5.7L7.8 9.5H4Z"/>
+    <path d="M16.2 9.4l4.6 5.2M20.8 9.4l-4.6 5.2"/>
+  </svg>
+  <svg class="snd-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9.5v5h3.8l4.7 3.8V5.7L7.8 9.5H4Z"/>
+    <path d="M15.7 9.2a4 4 0 0 1 0 5.6M18.3 6.6a8 8 0 0 1 0 10.8"/>
+  </svg>
+</button>
 
 <p class="hint" id="hint">Клик по коту — погладить &middot; Тащите — осмотреться</p>
 
@@ -790,6 +928,8 @@
   </div>
 </div>
 
+<script src="world-audio.js"></script>
+<script src="tihon-profile.js"></script>
 <script>
 (function () {
   'use strict';
@@ -3950,6 +4090,13 @@
 
   var addCatBtn = document.getElementById('addCatBtn');
   var feedBtn = document.getElementById('feedBtn');
+  var soundBtn = document.getElementById('soundBtn');
+  var worldAudio = window.WorldAudio ? new window.WorldAudio('room') : null;
+
+  if (worldAudio && soundBtn) worldAudio.bindButton(soundBtn);
+  else if (soundBtn) soundBtn.style.display = 'none';
+
+  if (window.TihonProfile) window.TihonProfile.visit('cats');
   var panLeft = document.getElementById('panLeft');
   var panRight = document.getElementById('panRight');
   var catCountEl = document.getElementById('catCount');
@@ -4167,6 +4314,8 @@
       return;
     }
 
+    if (worldAudio) worldAudio.sfx('click');
+
     lastFocus = document.activeElement;
     config = randomConfig();
     catNameInput.value = config.name;
@@ -4225,6 +4374,7 @@
     updateCounter();
     closeEditor();
     showToast(name + ' теперь живёт в комнате.');
+    if (worldAudio) worldAudio.sfx('add');
     hideHint();
   }
 
@@ -4345,11 +4495,15 @@
     }
 
     centerCameraOn(BOWL_X + 20);
+    if (worldAudio) worldAudio.sfx('feed');
+    if (window.TihonProfile) window.TihonProfile.event('feed');
     hideHint();
   }
 
   function petCat(cat, worldX) {
     cat.pet(worldX);
+    if (worldAudio) worldAudio.sfx('pet');
+    if (window.TihonProfile) window.TihonProfile.event('pet');
     hideHint();
   }
 

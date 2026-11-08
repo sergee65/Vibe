@@ -95,6 +95,124 @@
     animation: pulse 4s ease-in-out infinite;
   }
 
+  .back-home {
+    position: fixed;
+    top: calc(20px + env(safe-area-inset-top, 0px));
+    right: 24px;
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 34px;
+    padding: 0 12px 0 10px;
+    border: 1px solid rgba(180, 240, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(3, 22, 33, 0.44);
+    color: rgba(236, 252, 255, 0.88);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    backdrop-filter: blur(12px) saturate(130%);
+    box-shadow: 0 6px 22px rgba(0, 10, 20, 0.2);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .back-home svg {
+    width: 13px;
+    height: 13px;
+    flex: none;
+  }
+
+  .back-home:hover {
+    background: rgba(6, 40, 56, 0.64);
+    border-color: rgba(160, 240, 255, 0.42);
+    transform: translateY(-1px);
+  }
+
+  .back-home:active { transform: scale(0.97); }
+
+  .back-home:focus-visible {
+    outline: 2px solid rgba(160, 240, 255, 0.8);
+    outline-offset: 3px;
+  }
+
+  .sound-toggle {
+    position: fixed;
+    top: calc(62px + env(safe-area-inset-top, 0px));
+    right: 24px;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid rgba(180, 240, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(3, 22, 33, 0.44);
+    color: rgba(236, 252, 255, 0.88);
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    backdrop-filter: blur(12px) saturate(130%);
+    box-shadow: 0 6px 22px rgba(0, 10, 20, 0.2);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .sound-toggle:hover {
+    background: rgba(6, 40, 56, 0.64);
+    border-color: rgba(160, 240, 255, 0.42);
+    transform: translateY(-1px);
+  }
+
+  .sound-toggle:active { transform: scale(0.95); }
+
+  .sound-toggle:focus-visible {
+    outline: 2px solid rgba(160, 240, 255, 0.8);
+    outline-offset: 3px;
+  }
+
+  .sound-toggle svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+  }
+
+  .snd-on { display: none; }
+  .sound-toggle .snd-on { display: none; }
+
+  .sound-toggle[aria-pressed="true"] {
+    background: rgba(20, 105, 125, 0.8);
+    border-color: rgba(140, 240, 255, 0.5);
+    color: #effeff;
+  }
+
+  .sound-toggle[aria-pressed="true"] .snd-on { display: block; }
+  .sound-toggle[aria-pressed="true"] .snd-off { display: none; }
+
+  @media (max-width: 560px) {
+    .back-home {
+      top: calc(14px + env(safe-area-inset-top, 0px));
+      right: 15px;
+      height: 31px;
+      padding: 0 10px 0 8px;
+      gap: 5px;
+      font-size: 9px;
+    }
+
+    .back-home svg { width: 12px; height: 12px; }
+
+    .sound-toggle {
+      top: calc(52px + env(safe-area-inset-top, 0px));
+      right: 15px;
+      width: 31px;
+      height: 31px;
+    }
+
+    .sound-toggle svg { width: 14px; height: 14px; }
+  }
+
   .hint {
     position: fixed;
     left: 50%;
@@ -285,6 +403,7 @@
     .brand, .dock, .hint, .brand-mark { animation: none; }
   }
 </style>
+<link rel="stylesheet" href="tihon-profile.css" />
 </head>
 <body>
 <canvas id="tank" aria-label="Интерактивный аквариум с рыбками"></canvas>
@@ -295,6 +414,24 @@
   <span class="brand-mark"></span>
   Аквариум
 </header>
+
+<a class="back-home" href="index.html?back=1" aria-label="Вернуться в главное меню">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M15 5 8 12l7 7M8 12h12"/>
+  </svg>
+  <span>В меню</span>
+</a>
+
+<button class="sound-toggle" id="soundBtn" type="button" aria-pressed="false" aria-label="Включить музыку и звуки" title="Включить музыку и звуки">
+  <svg class="snd-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9.5v5h3.8l4.7 3.8V5.7L7.8 9.5H4Z"/>
+    <path d="M16.2 9.4l4.6 5.2M20.8 9.4l-4.6 5.2"/>
+  </svg>
+  <svg class="snd-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9.5v5h3.8l4.7 3.8V5.7L7.8 9.5H4Z"/>
+    <path d="M15.7 9.2a4 4 0 0 1 0 5.6M18.3 6.6a8 8 0 0 1 0 10.8"/>
+  </svg>
+</button>
 
 <p class="hint" id="hint">Кликните по воде — корм &middot; Перетащите — течение</p>
 
@@ -337,6 +474,8 @@
   </div>
 </div>
 
+<script src="world-audio.js"></script>
+<script src="tihon-profile.js"></script>
 <script>
 (function () {
   'use strict';
@@ -391,7 +530,14 @@
   var wordEl = document.getElementById('fishWord');
   var nightBtn = document.getElementById('nightBtn');
   var nightLabel = document.getElementById('nightLabel');
+  var soundBtn = document.getElementById('soundBtn');
   var hintTimer = null;
+  var worldAudio = window.WorldAudio ? new window.WorldAudio('aquarium') : null;
+
+  if (worldAudio && soundBtn) worldAudio.bindButton(soundBtn);
+  else if (soundBtn) soundBtn.style.display = 'none';
+
+  if (window.TihonProfile) window.TihonProfile.visit('aquarium');
 
   function sandTopY(x) {
     return state.h - state.sandH + Math.sin(x * 0.008) * 6 + Math.sin(x * 0.021 + 1.7) * 3;
@@ -1372,6 +1518,7 @@
     if (!silent) {
       addRipple(fish.x, fish.y, 58, 0.5);
       updateCounter();
+      if (worldAudio) worldAudio.sfx('add');
     }
     return true;
   }
@@ -1462,6 +1609,8 @@
       ));
     }
     addRipple(x, y, rand(60, 85), 0.55);
+    if (worldAudio) worldAudio.sfx('feed');
+    if (window.TihonProfile) window.TihonProfile.event('feed');
     hideHint();
   }
 
@@ -1826,6 +1975,7 @@
     document.body.classList.toggle('night', isNight);
     nightBtn.setAttribute('aria-pressed', String(isNight));
     nightLabel.textContent = isNight ? 'День' : 'Ночь';
+    if (worldAudio) worldAudio.sfx('night');
   }
 
   document.getElementById('addBtn').addEventListener('click', function () {
